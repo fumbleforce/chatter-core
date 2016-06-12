@@ -1,29 +1,54 @@
 Chatter.Room = ChatterRoom = Astro.Class({
-    name: "ChatterRoom",
-    collection: new Mongo.Collection("chatterroom"),
+  name: "ChatterRoom",
+  collection: new Mongo.Collection("chatterroom"),
 
-    fields: {
-        name: "string",
+  fields: {
+    name: "string",
 
-        roomType: {
-            type: "string"
-        },
+    description: "string",
 
-        lastActive: {
-            type: "date",
-            default: function() {
-              return (new Date());
-            }
-        }
+    roomType: {
+      type: "string"
     },
 
-    events: {
-
+    lastActive: {
+      type: "date",
+      default: function() {
+        return (new Date());
+      }
     },
 
-    methods: {
-
+    archived: {
+      type: "boolean",
+      default: function() {
+        return false;
+      }
     },
 
-    behaviors: ["timestamp"]
+    createdBy: "string"
+  },
+
+  validators: {
+    name: [
+      Validators.required(),
+      Validators.minLength(1),
+      Validators.maxLength(30)
+    ],
+
+    description: [
+      Validators.required(),
+      Validators.minLength(1),
+      Validators.maxLength(150)
+    ]
+  },
+
+  events: {
+
+  },
+
+  methods: {
+
+  },
+
+  behaviors: ["timestamp"]
 });

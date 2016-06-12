@@ -1,31 +1,35 @@
 Chatter.UserRoom = ChatterUserRoom = Astro.Class({
-    name: "ChatterUserRoom",
-    collection: new Mongo.Collection("chatteruserroom"),
+  name: "ChatterUserRoom",
+  collection: new Mongo.Collection("chatteruserroom"),
 
-    fields: {
-        userId: {
-            type: "string"
-        },
-
-        roomId: {
-            type: "string"
-        },
-
-        count: {
-            type: "number",
-            default: function() {
-              return 0;
-            }
-        }
+  fields: {
+    userId: {
+      type: "string"
     },
 
-    events: {
-
+    roomId: {
+      type: "string"
     },
 
-    methods: {
+    unreadMsgCount: {
+      type: "number",
+      default: function() {
+        return 0;
+      }
+    }
+  },
 
-    },
+  validators: {
 
-    behaviors: ["timestamp"]
+  },
+
+  events: {
+
+  },
+
+  methods: {
+
+  },
+
+  behaviors: ["timestamp"]
 });

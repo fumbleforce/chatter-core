@@ -18,17 +18,21 @@ Package.onUse(function(api) {
   api.use('momentjs:moment@2.8.4');
   api.use('jagi:astronomy@1.2.1');
   api.use('jagi:astronomy-timestamp-behavior@1.0.0');
+  api.use('jagi:astronomy-validators');
+  api.use('xolvio:cleaner');
+
 
   api.addFiles('chatter.js');
   api.addFiles('models/message.js');
   api.addFiles('models/room.js');
   api.addFiles('models/userroom.js');
-  api.addFiles('models/userroomcount.js');
+  api.addFiles('models/user.js');
 
   api.addFiles([
     'server/publish.js',
     'server/access.js',
     'server/methods.js'
+
   ], 'server');
 
   api.export([
@@ -37,9 +41,17 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
+  api.use('accounts-base');
   api.use('ecmascript');
-  api.use('tinytest');
+  api.use('practicalmeteor:chai');
   api.use('jorgeer:chatter-core');
-  api.addFiles('chattercore-tests.js');
+  api.use('xolvio:cleaner');
+  api.use('practicalmeteor:sinon');
+  api.addFiles([
+    'server-tests/test-helpers.js',
+    'imports/api/fixtures.js'
 
+  ], 'server');
+  api.mainModule('chattercore.server.tests.js', 'server');
+  api.mainModule('chattercore.client.tests.js', 'client');
 });
