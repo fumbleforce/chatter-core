@@ -26,7 +26,6 @@ Package.onUse(function(api) {
   api.addFiles('models/message.js');
   api.addFiles('models/room.js');
   api.addFiles('models/userroom.js');
-  api.addFiles('models/user.js');
 
   api.addFiles([
     'server/publish.js',
@@ -48,8 +47,7 @@ Package.onTest(function(api) {
   api.use('xolvio:cleaner');
   api.use('practicalmeteor:sinon');
   api.addFiles([
-    'server-tests/test-helpers.js',
-    'imports/api/fixtures.js'
+    'server-tests/test-helpers.js'
 
   ], 'server');
   api.mainModule('chattercore.server.tests.js', 'server');

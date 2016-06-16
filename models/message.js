@@ -19,6 +19,14 @@ Chatter.Message = ChatterMessage = Astro.Class({
 
     message: {
       type: "string"
+    },
+
+    nickname: {
+      type: "string"
+    },
+
+    avatar: {
+      type: "string"
     }
   },
 
@@ -46,8 +54,17 @@ Chatter.Message = ChatterMessage = Astro.Class({
   },
 
   methods: {
-    timeAgo: function () {
+    getTimeAgo: function () {
       return moment(this.get("createdAt")).fromNow();
+    },
+    getMinutesAgo: function () {
+      const now = moment(new Date());
+      const then = this.get("createdAt");
+      const duration = moment.duration(now.diff(then)).asMinutes();
+      return duration;
+    },
+    getDate: function () {
+      return moment(this.get("createdAt")).format("MMMM Do");
     }
   },
 

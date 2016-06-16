@@ -16,8 +16,8 @@ Meteor.publish("chatterMessages", function (params) {
     fields: {
       message: 1,
       roomId: 1,
-      userNick: 1,
-      userAvatar: 1,
+      nickname: 1,
+      avatar: 1,
       userId: 1,
       createdAt: 1
     }
@@ -63,22 +63,12 @@ Meteor.publish("users", function (roomId) {
   // TODO do some clever things here to determine
   // which users are visible
   return Meteor.users.find({
-    "status.online": true
   }, {
-    userNick: 1,
-    avatar: 1
+    fields: {
+      _id: 1,
+      username: 1,
+      profile: 1,
+      status: 1
+    }
   });
 });
-
-Meteor.publish("chatterUsers", function () {
-  // TODO do some clever things here to determine
-  // which users are visible
-  return Chatter.User.find({
-  }, {
-    _id: 1,
-    userId: 1,
-    userType: 1,
-    nickname: 1
-  });
-});
-

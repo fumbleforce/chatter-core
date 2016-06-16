@@ -33,8 +33,8 @@ describe("chatter models", function() {
     });
 
 
-    it("message returns the correct timeAgo when calling timeAgo()", function() {
-      assert.equal(message.timeAgo(), "a few seconds ago");
+    it("message returns the correct timeAgo when calling getTimeAgo()", function() {
+      assert.equal(message.getTimeAgo(), "a few seconds ago");
     });
 
   });
@@ -71,38 +71,6 @@ describe("chatter models", function() {
 
   });
 
-  describe("chatter user model", function() {
-
-    //initilizing test user
-    const attributes = {
-      userType: "test user type",
-      userId: "test user id",
-      nickname: "test nickname"
-    };
-
-    const defaultChatterUserId = new Chatter.User(attributes).save();
-    const defaultChatterUser = Chatter.User.findOne(defaultChatterUserId);
-
-    attributes.avatar = "test avatar";
-
-    const customChatterUserId = new Chatter.User(attributes).save();
-    const customChatterUser = Chatter.User.findOne(customChatterUserId);
-
-
-    it("User is inserted with correct attributes", function() {
-      assert.equal(defaultChatterUser.userType, attributes.userType);
-      assert.equal(defaultChatterUser.userId, attributes.userId);
-      assert.equal(defaultChatterUser.nickname, attributes.nickname);
-    });
-
-    it("User is inserted with correct defaults", function() {
-      assert.equal(defaultChatterUser.avatar, "http://localhost:3000/packages/jorgeer_chatter-semantic/public/images/avatar.jpg");
-    });
-
-    it("User is inserted when overwritting defaults", function() {
-      assert.equal(customChatterUser.avatar, "test avatar");
-    });
-  });
 
   describe("chatter userroom model", function() {
 
