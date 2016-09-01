@@ -37,7 +37,6 @@ Meteor.publish("chatterRooms", function () {
       description: 1,
       roomType: 1,
       lastActive: 1,
-      archived: 1,
       createdAt: 1
     }
   });
@@ -54,7 +53,8 @@ Meteor.publish("chatterUserRooms", function () {
     fields: {
       unreadMsgCount: 1,
       userId: 1,
-      roomId: 1
+      roomId: 1,
+      archived: 1
     }
   });
 });

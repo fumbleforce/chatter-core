@@ -64,7 +64,6 @@ describe("chatter models", function() {
     });
 
     it("room is inserted with correct defaults", function() {
-      assert.equal(room.archived, false);
       const now = new Date();
       assert.equal(now.getTime() - room.lastActive.getTime() < 20000, true);
     });
@@ -91,6 +90,8 @@ describe("chatter models", function() {
     it("User Room is inserted with correct attributes", function() {
       assert.equal(userRoom.userId, attributes.userId);
       assert.equal(userRoom.roomId, attributes.roomId);
+      assert.equal(userRoom.archived, false);
+
     });
 
     it("User Room is inserted with correct defaults", function() {

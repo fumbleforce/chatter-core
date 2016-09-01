@@ -3,9 +3,23 @@ Chatter.Room = ChatterRoom = Astro.Class({
   collection: new Mongo.Collection("chatterroom"),
 
   fields: {
-    name: "string",
+    name: {
+      type: "string",
+      validator: [
+        Validators.required(),
+        Validators.minLength(1),
+        Validators.maxLength(30)
+     ]
+    },
 
-    description: "string",
+    description: {
+      type: "string",
+      validator: [
+        Validators.required(),
+        Validators.minLength(1),
+        Validators.maxLength(150)
+     ]
+    },
 
     roomType: {
       type: "string"
@@ -18,28 +32,7 @@ Chatter.Room = ChatterRoom = Astro.Class({
       }
     },
 
-    archived: {
-      type: "boolean",
-      default: function() {
-        return false;
-      }
-    },
-
     createdBy: "string"
-  },
-
-  validators: {
-    name: [
-      Validators.required(),
-      Validators.minLength(1),
-      Validators.maxLength(30)
-    ],
-
-    description: [
-      Validators.required(),
-      Validators.minLength(1),
-      Validators.maxLength(150)
-    ]
   },
 
   events: {

@@ -10,15 +10,26 @@ Chatter.Message = ChatterMessage = Astro.Class({
 
   fields: {
     userId: {
-      type: "string"
+      type: "string",
+      validator: [
+        reqStrNotNull
+      ]
     },
 
     roomId: {
-      type: "string"
+      type: "string",
+      validator: [
+        reqStrNotNull
+      ]
     },
 
     message: {
-      type: "string"
+      type: "string",
+      validator: [
+        Validators.minLength(1, 'The message must not be empty!'),
+        Validators.maxLength(1000),
+        reqStrNotNull
+      ]
     },
 
     nickname: {
@@ -28,22 +39,6 @@ Chatter.Message = ChatterMessage = Astro.Class({
     avatar: {
       type: "string"
     }
-  },
-
-  validators: {
-    userId: [
-      reqStrNotNull
-    ],
-
-    roomId: [
-      reqStrNotNull
-    ],
-
-    message: [
-      Validators.minLength(1, 'The message must not be empty!'),
-      Validators.maxLength(1000),
-      reqStrNotNull
-    ]
   },
 
   events: {

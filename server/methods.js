@@ -13,7 +13,7 @@ const checkIfChatterUser = function(userId) {
 
 Meteor.methods({
 
-  "get.room.counts" () {
+  "get.room.unreadMsgCount" () {
     const userId =  Meteor.userId();
     checkIfChatterUser(userId);
     const userRooms = Chatter.UserRoom.find({userId}).fetch();
@@ -173,18 +173,21 @@ Meteor.methods({
   "room.archive" (params) {
     check(params, {
         roomId: String,
+        userId: String,
         archived: Boolean
     });
 
+    const userId =  Meteor.userId();
     const {roomId, archived} = params;
-    const room = Chatter.Room.findOne(roomId);
+    const userRoom = Chatter.UserRoom.findOne({roomId, userId});
 
-    if (!room) {
-      throw new Meteor.Error("non-existing-room", "room does not exist");
+    if (!userRoom) {
+      throw new Meteor.Error("user-not-in-room", "user must be in room");
     }
 
-    Chatter.Room.update({
-      _id : roomId
+    Chatter.UserRoom.update({
+      roomId,
+      userId
     },
     {
       $set:{archived: archived}
@@ -219,7 +222,7 @@ Meteor.methods({
     return nickname;
   },
 
-  "room.counter.reset" (roomId) {
+  "room.unreadMsgCount.reset" (roomId) {
     check(roomId, String);
 
     const userId =  Meteor.userId();

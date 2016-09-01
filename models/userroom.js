@@ -16,7 +16,14 @@ Chatter.UserRoom = ChatterUserRoom = Astro.Class({
       default: function() {
         return 0;
       }
-    }
+    },
+
+    archived: {
+      type: "boolean",
+      default: function() {
+        return false;
+      }
+    },
   },
 
   validators: {
